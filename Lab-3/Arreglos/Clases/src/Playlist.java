@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Playlist {
   private String nombre;
   private Song[] canciones; //Declaro un arreglo indefinido
@@ -46,7 +44,7 @@ public class Playlist {
       canciones[x] = canciones[y];
       canciones[y] = temp;
       System.out.println("Canciones intercambiadas");
-    } else{
+    } else {
       System.out.println("No se puede intercambiar canciones");
     }
   }
