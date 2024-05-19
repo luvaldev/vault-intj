@@ -23,7 +23,6 @@ public class Song {
     return album;
   }
 
-  public int getDuracion(){
-    return duracion;
-  }
+  public int getDuracion(){return duracion;}
 }
+
