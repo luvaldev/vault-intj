@@ -44,6 +44,8 @@ public class Main {
     finish = System.nanoTime();
     System.out.println("BubbleSort time: " + (finish - start) + " ns.");
 
+    System.out.println("");
+
     // Medir el tiempo de construcción del árbol balanceado
     long startBalancedTree = System.nanoTime();
     Tree balancedTree = TreeBuilder.buildBalancedTree(songs);
@@ -56,24 +58,27 @@ public class Main {
     long finishUnbalancedTree = System.nanoTime();
     System.out.println("Time to build unbalanced tree: " + (finishUnbalancedTree - startUnbalancedTree) + " ns.");
 
+    System.out.println(" ");
+
     // Realizar consultas sobre el árbol balanceado
     System.out.println("Searching in balanced tree:");
     long startBalancedQueries = System.nanoTime();
-    searchQueries(balancedTree, songs);
+    searchQueries(balancedTree, songs, 100);
     long finishBalancedQueries = System.nanoTime();
     System.out.println("Time to search in balanced tree: " + (finishBalancedQueries - startBalancedQueries) + " ns.");
 
     // Realizar consultas sobre el árbol no balanceado
     System.out.println("Searching in unbalanced tree:");
     long startUnbalancedQueries = System.nanoTime();
-    searchQueries(unbalancedTree, songs);
+    searchQueries(unbalancedTree, songs, 100);
     long finishUnbalancedQueries = System.nanoTime();
     System.out.println("Time to search in unbalanced tree: " + (finishUnbalancedQueries - startUnbalancedQueries) + " ns.");
   }
 
-  public static void searchQueries(Tree root, List<Song> songs) {
+  public static void searchQueries(Tree root, List<Song> songs, int numQueries) {
     // Ejemplo de consulta: buscar canciones por nombre
-    for (Song song : songs) {
+    for (int i = 0; i < numQueries && i < songs.size(); i++) {
+      Song song = songs.get(i);
       TreeSearch.searchByName(root, song.getName());
     }
   }
