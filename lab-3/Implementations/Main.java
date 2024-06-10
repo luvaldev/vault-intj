@@ -3,6 +3,8 @@ package Implementations;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.Random;
+import java.util.Set;
 
 public class Main {
   public static void main(String[] args) {
@@ -41,5 +43,38 @@ public class Main {
     dataBubbleSort = SortingMethods.bubbleSort(dataBubbleSort, false); // Ordenar por nombre
     finish = System.nanoTime();
     System.out.println("BubbleSort time: " + (finish - start) + " ns.");
+
+    // Medir el tiempo de construcción del árbol balanceado
+    long startBalancedTree = System.nanoTime();
+    Tree balancedTree = TreeBuilder.buildBalancedTree(songs);
+    long finishBalancedTree = System.nanoTime();
+    System.out.println("Time to build balanced tree: " + (finishBalancedTree - startBalancedTree) + " ns.");
+
+    // Medir el tiempo de construcción del árbol no balanceado
+    long startUnbalancedTree = System.nanoTime();
+    Tree unbalancedTree = TreeBuilder.buildUnbalancedTree(songs);
+    long finishUnbalancedTree = System.nanoTime();
+    System.out.println("Time to build unbalanced tree: " + (finishUnbalancedTree - startUnbalancedTree) + " ns.");
+
+    // Realizar consultas sobre el árbol balanceado
+    System.out.println("Searching in balanced tree:");
+    long startBalancedQueries = System.nanoTime();
+    searchQueries(balancedTree, songs);
+    long finishBalancedQueries = System.nanoTime();
+    System.out.println("Time to search in balanced tree: " + (finishBalancedQueries - startBalancedQueries) + " ns.");
+
+    // Realizar consultas sobre el árbol no balanceado
+    System.out.println("Searching in unbalanced tree:");
+    long startUnbalancedQueries = System.nanoTime();
+    searchQueries(unbalancedTree, songs);
+    long finishUnbalancedQueries = System.nanoTime();
+    System.out.println("Time to search in unbalanced tree: " + (finishUnbalancedQueries - startUnbalancedQueries) + " ns.");
+  }
+
+  public static void searchQueries(Tree root, List<Song> songs) {
+    // Ejemplo de consulta: buscar canciones por nombre
+    for (Song song : songs) {
+      TreeSearch.searchByName(root, song.getName());
+    }
   }
 }
